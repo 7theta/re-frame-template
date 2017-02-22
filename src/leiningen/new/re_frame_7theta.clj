@@ -18,47 +18,55 @@
             [leiningen.new.options.less :as less]
             [leiningen.new.options.server :as server]
             [leiningen.new.options.test :as test]
-            [clojure.set :as set]))
+            [clojure.set :as set]
+            [clojure.string :as st]))
 
 (declare template-data check-options app-files)
 
 ;;; Public
 
 (def available-options
-  #{server/option garden/option less/option "+re-frisk" test/option})
+  #{"+server" "+via" "+re-frisk" "+test" "+garden" "+less"})
 
 (defn re-frame-7theta
   [name & options]
-  (let [data (template-data name options)]
-    (check-options options)
+  (check-options options)
+  (let [options (->> options
+                     (filter (partial available-options))
+                     (map #(keyword (apply str (rest %))))
+                     set)
+        options (cond-> options (options :via) (conj :server))
+        data (template-data name options)]
     (main/info "Generating re-frame project with 7theta template.")
     (apply ->files data (app-files data options))))
 
 ;;; Implementation
+
+(defn check-options
+  [options]
+  (let [options-set (into #{} options)]
+    (when-not (set/superset? available-options options-set)
+      (main/abort (str "\nError: invalid option(s)\nAvailable: "
+                       (st/join " " (sort available-options)) "\n")))))
 
 (defn template-data
   [name options]
   {:name name
    :ns-name (sanitize-ns name)
    :sanitized (name-to-path name)
-   :server? (helpers/invoke-option server/option options)
-   :re-frisk? (helpers/invoke-option "+re-frisk" options)
-   :test? (helpers/invoke-option test/option options)
-   :garden? (helpers/invoke-option garden/option options)
-   :less? (helpers/invoke-option less/option options)})
-
-(defn check-options
-  [options]
-  (let [options-set (into #{} options)]
-    (when-not (set/superset? available-options options-set)
-      (main/abort "\nError: invalid profile(s)\n"))))
+   :server? (helpers/option-renderer options :server)
+   :via? (helpers/option-renderer options :via)
+   :re-frisk? (helpers/option-renderer options :re-frisk)
+   :test? (helpers/option-renderer options :test)
+   :garden? (helpers/option-renderer options :garden)
+   :less? (helpers/option-renderer options :less)})
 
 (defn app-files
   [data options]
   (concat
-   (base/files data)
-   (views/files data)
-   (when (helpers/option? server/option options) (server/files data))
-   (when (helpers/option? garden/option options) (garden/files data))
-   (when (helpers/option? less/option options) (less/files data))
-   (when (helpers/option? test/option options) (test/files data))))
+   (base/files data options)
+   (views/files data options)
+   (when (options :server) (server/files data options))
+   (when (options :test) (test/files data options))
+   (when (options :garden) (garden/files data options))
+   (when (options :less) (less/files data options))))

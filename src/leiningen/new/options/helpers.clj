@@ -30,11 +30,7 @@
   ([resource-path data]
    (render-text resource-path data)))
 
-(defn option?
-  [option-name options]
-  (some #{option-name} options))
-
-(defn invoke-option
-  [option options]
+(defn option-renderer
+  [options option]
   (fn [block]
-    (if (option? option options) (str block) "")))
+    (if (options option) (str block) "")))

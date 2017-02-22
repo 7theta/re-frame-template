@@ -6,4 +6,4 @@
   (when config/debug?
     (enable-console-print!){{#re-frisk?}}
     (enable-re-frisk!){{/re-frisk?}}
-    (println "dev mode")))
+    (println "Running in dev mode")))

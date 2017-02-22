@@ -11,20 +11,20 @@
 (ns leiningen.new.options.server
   (:require [leiningen.new.options.helpers :as helpers]))
 
-(def option "+server")
-
 (defn files
-  [data]
-  [["src/clj/{{sanitized}}/handler.clj" (helpers/render "src/clj/handler.clj" data)]
-   ["src/clj/{{sanitized}}/msg_handler.clj" (helpers/render "src/clj/msg_handler.clj" data)]
-   ["src/clj/{{sanitized}}/system.clj" (helpers/render "src/clj/system.clj" data)]
+  [data options]
+  (concat
+   [["src/clj/{{sanitized}}/handler.clj" (helpers/render "src/clj/handler.clj" data)]
+    ["src/clj/{{sanitized}}/system.clj" (helpers/render "src/clj/system.clj" data)]
 
-   ["dev/clj/{{sanitized}}/app.clj" (helpers/render "dev/clj/app.clj" data)]
-   ["dev/clj/{{sanitized}}/dev_handler.clj" (helpers/render "dev/clj/dev_handler.clj" data)]
+    ["dev/clj/{{sanitized}}/app.clj" (helpers/render "dev/clj/app.clj" data)]
+    ["dev/clj/{{sanitized}}/dev_handler.clj" (helpers/render "dev/clj/dev_handler.clj" data)]
 
-   ["prod/clj/{{sanitized}}/app.clj" (helpers/render "prod/clj/app.clj" data)]
-   ["prod/clj/{{sanitized}}/server.clj" (helpers/render "prod/clj/server.clj" data)]
+    ["prod/clj/{{sanitized}}/app.clj" (helpers/render "prod/clj/app.clj" data)]
+    ["prod/clj/{{sanitized}}/server.clj" (helpers/render "prod/clj/server.clj" data)]
 
-   ["src/cljs/{{sanitized}}/msg_handler.cljs" (helpers/render "src/cljs/msg_handler.cljs" data)]
-   ["src/cljs/{{sanitized}}/system.cljs" (helpers/render "src/cljs/system.cljs" data)]
-   ["src/cljs/{{sanitized}}/app.cljs" (helpers/render "src/cljs/app.cljs" data)]])
+    ["src/cljs/{{sanitized}}/system.cljs" (helpers/render "src/cljs/system.cljs" data)]
+    ["src/cljs/{{sanitized}}/app.cljs" (helpers/render "src/cljs/app.cljs" data)]]
+   (when (options :via)
+     [["src/clj/{{sanitized}}/msg_handler.clj" (helpers/render "src/clj/msg_handler.clj" data)]
+      ["src/cljs/{{sanitized}}/msg_handler.cljs" (helpers/render "src/cljs/msg_handler.cljs" data)]])))

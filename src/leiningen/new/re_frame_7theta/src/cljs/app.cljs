@@ -2,4 +2,4 @@
     (:require [{{ns-name}}.system :refer [system]]
               [com.stuartsierra.component :as component]))
 
-(defonce app (component/start system))
+(defonce app (component/start (system)))

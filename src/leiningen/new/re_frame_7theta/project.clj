@@ -1,18 +1,19 @@
 (defproject {{ns-name}} "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.456"]
+                 [org.clojure/clojurescript "1.9.473"]
 
                  [reagent "0.6.0"]
-                 [re-frame "0.9.1"]{{#garden?}}
+                 [re-frame "0.9.2"]{{#garden?}}
                  [garden "1.3.2"]{{/garden?}}{{#server?}}
 
                  [http-kit "2.2.0"]
                  [ring/ring-core "1.5.1"]
                  [ring/ring-defaults "0.2.3"]
                  [ring/ring-anti-forgery "1.0.1"]
-                 [compojure "1.5.2"]
+                 [compojure "1.5.2"]{{#via?}}
 
                  [com.7theta/via "0.3.0"]
+                 [com.7theta/re-frame-via-fx "0.1.0"]{{/via?}}
 
                  [com.stuartsierra/component "0.3.2"]
                  [yogthos/config "0.8"]{{/server?}}]
@@ -29,12 +30,12 @@
              :ring-handler {{name}}.dev-handler/dev-handler{{/server?}}}
   :profiles {:dev {:source-paths ["dev/clj"]
                    :dependencies [{{#re-frisk?}}[re-frisk "0.3.2"]
-                                  {{/re-frisk?}}[ns-tracker "0.3.0"]
-                                  [binaryage/devtools "0.8.2"]
-                                  [figwheel-sidecar "0.5.7"]
+                                  {{/re-frisk?}}[ns-tracker "0.3.1"]
+                                  [binaryage/devtools "0.9.1"]
+                                  [figwheel-sidecar "0.5.9"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [ring/ring-devel "1.5.1"]]
-                   :plugins [[lein-figwheel "0.5.7"]{{#test?}}
+                   :plugins [[lein-figwheel "0.5.9"]{{#test?}}
                              [lein-doo "0.1.7"]{{/test?}}]}{{#server?}}
              :uberjar {:source-paths ["prod/clj"]
                        :main {{name}}.server

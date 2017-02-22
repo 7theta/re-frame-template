@@ -12,7 +12,7 @@
   (:require [leiningen.new.options.helpers :as helpers]))
 
 (defn files
-  [data]
+  [data options]
   [["README.md" (helpers/render "README.md" data)]
    ["project.clj" (helpers/render "project.clj" data)]
    [".gitignore" (helpers/render ".gitignore" data)]

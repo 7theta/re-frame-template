@@ -12,5 +12,5 @@
   (:require [leiningen.new.options.helpers :as helpers]))
 
 (defn files
-  [data]
+  [data options]
   [["src/cljs/{{sanitized}}/views.cljs" (helpers/render "src/cljs/views.cljs" data)]])

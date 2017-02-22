@@ -1,5 +1,8 @@
 # re-frame-7theta
 
+[![Current Version](https://img.shields.io/clojars/v/re-frame-7theta/lein-template.svg)](https://clojars.org/re-frame-7theta/lein-template)
+[![GitHub license](https://img.shields.io/github/license/7theta/re-frame-template.svg)](LICENSE)
+
 Leiningen template
 for [reagent](https://github.com/reagent-project/reagent) web apps
 that implements the [re-frame](https://github.com/Day8/re-frame)
@@ -24,7 +27,8 @@ lein new re-frame-7theta <project-name>
 
 The optional profiles include:
 
-* [compojure](https://github.com/weavejester/compojure) and [via](https://github.com/7theta/via) (`+server`)
+* [compojure](https://github.com/weavejester/compojure) (`+server`)
+* [via](https://github.com/7theta/via) (`+via`) implies (`+server`)
 * [cljs.test](https://github.com/clojure/clojurescript/blob/master/src/main/cljs/cljs/test.cljs) and [doo](https://github.com/bensu/doo) (`+test`)
 * [garden](https://github.com/noprompt/garden) (`+garden`)
 * [less](https://github.com/montoux/lein-less) (`+less`)
