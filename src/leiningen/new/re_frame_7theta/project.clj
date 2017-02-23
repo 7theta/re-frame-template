@@ -12,8 +12,7 @@
                  [ring/ring-anti-forgery "1.0.1"]
                  [compojure "1.5.2"]{{#via?}}
 
-                 [com.7theta/via "0.3.0"]
-                 [com.7theta/re-frame-via-fx "0.1.0"]{{/via?}}
+                 [com.7theta/re-frame-via-fx "0.2.0"]{{/via?}}
 
                  [com.stuartsierra/component "0.3.2"]
                  [yogthos/config "0.8"]{{/server?}}]

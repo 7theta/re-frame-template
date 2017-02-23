@@ -138,5 +138,3 @@ lein uberjar
 Copyright © 2015, 2016, 2017 7theta
 
 Distributed under the Eclipse Public License.
-
-
