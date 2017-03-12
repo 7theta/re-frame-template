@@ -32,8 +32,9 @@
                                   {{/re-frisk?}}[ns-tracker "0.3.1"]
                                   [binaryage/devtools "0.9.1"]
                                   [figwheel-sidecar "0.5.9"]
-                                  [com.cemerick/piggieback "0.2.1"]
-                                  [ring/ring-devel "1.5.1"]]
+                                  [com.cemerick/piggieback "0.2.1"]{{#server?}}
+                                  [ring/ring-devel "1.5.1"]
+                                  [org.clojure/tools.namespace "0.2.11"]{{/server?}}]
                    :plugins [[lein-figwheel "0.5.9"]{{#test?}}
                              [lein-doo "0.1.7"]{{/test?}}]}{{#server?}}
              :uberjar {:source-paths ["prod/clj"]

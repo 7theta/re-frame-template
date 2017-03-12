@@ -17,6 +17,8 @@
    [["src/clj/{{sanitized}}/handler.clj" (helpers/render "src/clj/handler.clj" data)]
     ["src/clj/{{sanitized}}/system.clj" (helpers/render "src/clj/system.clj" data)]
 
+    ["dev/clj/user.clj" (helpers/render "dev/clj/user.clj" data)]
+    ["dev/clj/dev.clj" (helpers/render "dev/clj/dev.clj" data)]
     ["dev/clj/{{sanitized}}/app.clj" (helpers/render "dev/clj/app.clj" data)]
     ["dev/clj/{{sanitized}}/dev_handler.clj" (helpers/render "dev/clj/dev_handler.clj" data)]
 

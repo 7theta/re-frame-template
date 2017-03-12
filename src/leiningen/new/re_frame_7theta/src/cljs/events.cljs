@@ -10,5 +10,5 @@
 {{/via?}}
 (reg-event-db
  :initialize-db
- (fn  [_ _]
+ (fn [_ _]
    db/default-db))
