@@ -1,22 +1,22 @@
 (defproject {{ns-name}} "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.473"]
+                 [org.clojure/clojurescript "1.9.854"]
 
-                 [reagent "0.6.0"]
-                 [re-frame "0.9.2"]{{#garden?}}
+                 [reagent "0.7.0"]
+                 [re-frame "0.9.4"]{{#garden?}}
                  [garden "1.3.2"]{{/garden?}}{{#server?}}
 
                  [http-kit "2.2.0"]
-                 [ring/ring-core "1.5.1"]
-                 [ring/ring-defaults "0.2.3"]
-                 [ring/ring-anti-forgery "1.0.1"]
-                 [compojure "1.5.2"]{{#via?}}
+                 [ring/ring-core "1.6.2"]
+                 [ring/ring-defaults "0.3.1"]
+                 [ring/ring-anti-forgery "1.1.0"]
+                 [compojure "1.6.0"]{{#via?}}
 
-                 [com.7theta/re-frame-via-fx "0.2.0"]{{/via?}}
+                 [com.7theta/re-frame-via-fx "0.2.2"]{{/via?}}
 
-                 [com.stuartsierra/component "0.3.2"]
+                 [integrant "0.5.0"]
                  [yogthos/config "0.8"]{{/server?}}]
-  :plugins [[lein-cljsbuild "1.1.4"]{{#garden?}}
+  :plugins [[lein-cljsbuild "1.1.7"]{{#garden?}}
             [lein-garden "0.2.8"]{{/garden?}}{{#less?}}
             [lein-less "1.7.5"]{{/less?}}]
   :min-lein-version "2.5.3"{{#server?}}
@@ -28,14 +28,14 @@
   :figwheel {:css-dirs ["resources/public/css"]{{#server?}}
              :ring-handler {{name}}.dev-handler/dev-handler{{/server?}}}
   :profiles {:dev {:source-paths ["dev/clj"]
-                   :dependencies [{{#re-frisk?}}[re-frisk "0.3.2"]
+                   :dependencies [{{#re-frisk?}}[re-frisk "0.4.5"]
                                   {{/re-frisk?}}[ns-tracker "0.3.1"]
-                                  [binaryage/devtools "0.9.1"]
-                                  [figwheel-sidecar "0.5.9"]
-                                  [com.cemerick/piggieback "0.2.1"]{{#server?}}
-                                  [ring/ring-devel "1.5.1"]
-                                  [org.clojure/tools.namespace "0.2.11"]{{/server?}}]
-                   :plugins [[lein-figwheel "0.5.9"]{{#test?}}
+                                  [binaryage/devtools "0.9.4"]
+                                  [figwheel-sidecar "0.5.11"]
+                                  [com.cemerick/piggieback "0.2.2"]{{#server?}}
+                                  [ring/ring-devel "1.6.2"]
+                                  [integrant/repl "0.2.0"]{{/server?}}]
+                   :plugins [[lein-figwheel "0.5.11"]{{#test?}}
                              [lein-doo "0.1.7"]{{/test?}}]}{{#server?}}
              :uberjar {:source-paths ["prod/clj"]
                        :main {{name}}.server
@@ -57,7 +57,6 @@
                         :compiler {:main {{name}}.core
                                    :output-to "resources/public/js/compiled/app.js"
                                    :optimizations :advanced
-                                   :closure-defines {goog.DEBUG false}
                                    :pretty-print false}}
                        {:id "test"
                         :source-paths ["src/cljs" "dev/cljs" "test/cljs"]
@@ -72,5 +71,5 @@
                                             :pretty-print? true}}]}{{/garden?}}{{#less?}}
   :less {:source-paths ["less"]
          :target-path "resources/public/css"}
-  {{/less?}}:prep-tasks [["cljsbuild" "once" "min"]{{#garden?}} ["garden" "once"] {{/garden?}}{{#less?}}
+  {{/less?}}:prep-tasks [["cljsbuild" "once" "dev"]{{#garden?}} ["garden" "once"] {{/garden?}}{{#less?}}
                          ["less" "once"]{{/less?}} "compile"])

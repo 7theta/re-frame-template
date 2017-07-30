@@ -1,5 +1,5 @@
 (ns {{ns-name}}.app
-    (:require [{{ns-name}}.system :refer [system]]
-              [com.stuartsierra.component :as component]))
+    (:require [{{ns-name}}.config :refer [config]]
+              [integrant.core :as ig]))
 
-(def app (component/start (system)))
+(defonce app (ig/init config))

@@ -15,7 +15,7 @@
   [data options]
   (concat
    [["src/clj/{{sanitized}}/handler.clj" (helpers/render "src/clj/handler.clj" data)]
-    ["src/clj/{{sanitized}}/system.clj" (helpers/render "src/clj/system.clj" data)]
+    ["src/clj/{{sanitized}}/config.clj" (helpers/render "src/clj/config.clj" data)]
 
     ["dev/clj/user.clj" (helpers/render "dev/clj/user.clj" data)]
     ["dev/clj/dev.clj" (helpers/render "dev/clj/dev.clj" data)]
@@ -25,7 +25,7 @@
     ["prod/clj/{{sanitized}}/app.clj" (helpers/render "prod/clj/app.clj" data)]
     ["prod/clj/{{sanitized}}/server.clj" (helpers/render "prod/clj/server.clj" data)]
 
-    ["src/cljs/{{sanitized}}/system.cljs" (helpers/render "src/cljs/system.cljs" data)]
+    ["src/cljs/{{sanitized}}/config.cljs" (helpers/render "src/cljs/config.cljs" data)]
     ["src/cljs/{{sanitized}}/app.cljs" (helpers/render "src/cljs/app.cljs" data)]]
    (when (options :via)
      [["src/clj/{{sanitized}}/msg_handler.clj" (helpers/render "src/clj/msg_handler.clj" data)]
