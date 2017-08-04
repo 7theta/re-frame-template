@@ -7,7 +7,7 @@
                  [garden "1.3.2"]{{/garden?}}{{#server?}}
 
                  [http-kit "2.2.0"]
-                 [ring/ring-core "1.6.2"]
+                 [ring/ring-core "1.6.2" :exclusions [commons-codec]]
                  [ring/ring-defaults "0.3.1"]
                  [ring/ring-anti-forgery "1.1.0"]
                  [compojure "1.6.0"]{{#via?}}
@@ -16,26 +16,24 @@
 
                  [integrant "0.5.0"]
                  [yogthos/config "0.8"]{{/server?}}]
-  :plugins [[lein-cljsbuild "1.1.7"]{{#garden?}}
-            [lein-garden "0.2.8"]{{/garden?}}{{#less?}}
-            [lein-less "1.7.5"]{{/less?}}]
   :min-lein-version "2.5.3"{{#server?}}
   :source-paths ["src/clj"]{{/server?}}
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"{{#test?}}
                                     "test/js"{{/test?}}{{#garden?}}
                                     "resources/public/css"{{/garden?}}]
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-  :figwheel {:css-dirs ["resources/public/css"]{{#server?}}
-             :ring-handler {{name}}.dev-handler/dev-handler{{/server?}}}
   :profiles {:dev {:source-paths ["dev/clj"]
                    :dependencies [{{#re-frisk?}}[re-frisk "0.4.5"]
                                   {{/re-frisk?}}[ns-tracker "0.3.1"]
                                   [binaryage/devtools "0.9.4"]
-                                  [figwheel-sidecar "0.5.11"]
+                                  [figwheel-sidecar "0.5.12"]
                                   [com.cemerick/piggieback "0.2.2"]{{#server?}}
                                   [ring/ring-devel "1.6.2"]
                                   [integrant/repl "0.2.0"]{{/server?}}]
-                   :plugins [[lein-figwheel "0.5.11"]{{#test?}}
+                   :plugins [[lein-cljsbuild "1.1.7" :exclusions [org.apache.commons/commons-compress]]{{#garden?}}
+                             [lein-garden "0.3.0" :exclusions [org.clojure/clojure]]{{/garden?}}{{#less?}}
+                             [lein-less "1.7.5"]{{/less?}}
+                             [lein-figwheel "0.5.12" :exclusions [org.clojure/clojure]]{{#test?}}
                              [lein-doo "0.1.7"]{{/test?}}]}{{#server?}}
              :uberjar {:source-paths ["prod/clj"]
                        :main {{name}}.server
@@ -71,5 +69,5 @@
                                             :pretty-print? true}}]}{{/garden?}}{{#less?}}
   :less {:source-paths ["less"]
          :target-path "resources/public/css"}
-  {{/less?}}:prep-tasks [["cljsbuild" "once" "dev"]{{#garden?}} ["garden" "once"] {{/garden?}}{{#less?}}
+  {{/less?}}:prep-tasks [["cljsbuild" "once" "min"]{{#garden?}} ["garden" "once"] {{/garden?}}{{#less?}}
                          ["less" "once"]{{/less?}} "compile"])

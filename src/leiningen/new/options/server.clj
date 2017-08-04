@@ -19,14 +19,13 @@
 
     ["dev/clj/user.clj" (helpers/render "dev/clj/user.clj" data)]
     ["dev/clj/dev.clj" (helpers/render "dev/clj/dev.clj" data)]
-    ["dev/clj/{{sanitized}}/app.clj" (helpers/render "dev/clj/app.clj" data)]
-    ["dev/clj/{{sanitized}}/dev_handler.clj" (helpers/render "dev/clj/dev_handler.clj" data)]
 
     ["prod/clj/{{sanitized}}/app.clj" (helpers/render "prod/clj/app.clj" data)]
     ["prod/clj/{{sanitized}}/server.clj" (helpers/render "prod/clj/server.clj" data)]
 
     ["src/cljs/{{sanitized}}/config.cljs" (helpers/render "src/cljs/config.cljs" data)]
-    ["src/cljs/{{sanitized}}/app.cljs" (helpers/render "src/cljs/app.cljs" data)]]
+    ["src/cljs/{{sanitized}}/app.cljs" (helpers/render "src/cljs/app.cljs" data)]
+    ["src/cljs/{{sanitized}}/core.cljs" (helpers/render "src/cljs/core.cljs" data)]]
    (when (options :via)
      [["src/clj/{{sanitized}}/msg_handler.clj" (helpers/render "src/clj/msg_handler.clj" data)]
       ["src/cljs/{{sanitized}}/msg_handler.cljs" (helpers/render "src/cljs/msg_handler.cljs" data)]])))

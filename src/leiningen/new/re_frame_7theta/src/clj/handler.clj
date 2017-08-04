@@ -8,9 +8,8 @@
               [ring.middleware.session :refer [wrap-session]]))
 
 (defn handler
-  [app]
-  (let [{{#via?}}client-proxy (:via.server.client-proxy/client-proxy app)
-        ring-ajax-get-or-ws-handshake (:ring-ajax-get-or-ws-handshake-fn client-proxy)
+  [{{#via?}}client-proxy{{/via?}}]
+  (let [{{#via?}}ring-ajax-get-or-ws-handshake (:ring-ajax-get-or-ws-handshake-fn client-proxy)
         ring-ajax-post (:ring-ajax-post-fn client-proxy)
         {{/via?}}routes (routes
                          (GET "/" req-req (content-type

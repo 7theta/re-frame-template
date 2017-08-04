@@ -7,4 +7,4 @@
 
 (defn -main [& args]
   (let [port (Integer/parseInt (or (env :port) "8080"))]
-    (run-server (handler app) {:port port})))
+    (run-server (handler (:via.server.client-proxy/client-proxy app)) {:port port})))

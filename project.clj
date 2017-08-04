@@ -8,7 +8,7 @@
 ;;   the terms of this license.
 ;;   You must not remove this notice, or any others, from this software.
 
-(defproject re-frame-7theta/lein-template "0.3.1"
+(defproject re-frame-7theta/lein-template "0.4.0"
   :description "Leiningen template for re-frame apps based on 7theta libraries"
   :url "https://github.com/7theta/re-frame-template"
   :license {:name "Eclipse Public License"
