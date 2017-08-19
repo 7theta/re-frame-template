@@ -18,15 +18,20 @@
             [clojure.pprint :refer [pprint]]
             [clojure.reflect :refer [reflect]]))
 
+{{#via?}}
 (def dev-config (assoc config :figwheel {:client-proxy
                                          (ig/ref :via.server.client-proxy/client-proxy)}))
+{{/via?}}
+{{^via?}}
+(def dev-config (assoc config :figwheel nil))
+{{/via?}}
 
 (defmethod ig/init-key :figwheel [_ {:keys [client-proxy]}]
   (component/start
    (component/system-map
     :figwheel-system (-> (fig/fetch-config)
                          (assoc-in [:data :figwheel-options :ring-handler]
-                                   (handler client-proxy))
+                                   (handler{{#via?}} client-proxy{{/via?}}))
                          fig/figwheel-system)
     :css-watcher (fig/css-watcher
                   {:watch-paths ["resources/public/css"]}))))

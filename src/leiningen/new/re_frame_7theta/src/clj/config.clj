@@ -11,4 +11,4 @@
    {:msg-handler msg-handler
     :client-proxy (ig/ref :via.server.client-proxy/client-proxy)}}{{/via?}}{{^via?}}{}{{/via?}})
 
-(ig/load-namespaces config)
+{{#via?}}(ig/load-namespaces config){{/via?}}

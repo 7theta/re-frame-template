@@ -1,6 +1,6 @@
 (defproject {{ns-name}} "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.904"]
+                 [org.clojure/clojurescript "1.9.908"]
 
                  [reagent "0.7.0"]
                  [re-frame "0.10.1"]{{#garden?}}
@@ -12,7 +12,7 @@
                  [ring/ring-anti-forgery "1.1.0"]
                  [compojure "1.6.0"]{{#via?}}
 
-                 [com.7theta/re-frame-via-fx "0.2.4"]{{/via?}}
+                 [com.7theta/re-frame-via-fx "0.2.5"]{{/via?}}
 
                  [integrant "0.6.0"]
                  [yogthos/config "0.8"]{{/server?}}]

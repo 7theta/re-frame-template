@@ -20,7 +20,6 @@
     ["dev/clj/user.clj" (helpers/render "dev/clj/user.clj" data)]
     ["dev/clj/dev.clj" (helpers/render "dev/clj/dev.clj" data)]
 
-    ["prod/clj/{{sanitized}}/app.clj" (helpers/render "prod/clj/app.clj" data)]
     ["prod/clj/{{sanitized}}/server.clj" (helpers/render "prod/clj/server.clj" data)]
 
     ["src/cljs/{{sanitized}}/config.cljs" (helpers/render "src/cljs/config.cljs" data)]
