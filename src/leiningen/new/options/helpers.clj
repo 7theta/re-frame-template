@@ -32,5 +32,4 @@
 
 (defn option-renderer
   [options option]
-  (fn [block]
-    (if (options option) (str block) "")))
+  (when (options option) str))

@@ -4,10 +4,10 @@
               [via.client.router]
               [integrant.core :as ig]){{/via?}})
 
-(def config{{#via?}}
+(def config{{^via?}} {}{{/via?}}{{#via?}}
   {:via.client.server-proxy/server-proxy
    nil
 
    :via.client.router/router
    {:msg-handler msg-handler
-    :server-proxy (ig/ref :via.client.server-proxy/server-proxy)}}{{/via?}}{{^via?}}{}{{/via?}})
+    :server-proxy (ig/ref :via.client.server-proxy/server-proxy)}}{{/via?}})
