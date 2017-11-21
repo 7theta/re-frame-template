@@ -16,10 +16,10 @@ The base template includes:
 
 * [re-frame](https://github.com/Day8/re-frame)
 * [figwheel](https://github.com/bhauman/lein-figwheel)
-* [cljs-devtools](https://github.com/binaryage/cljs-devtools) 
-    1. Open Chrome's DevTools,`Ctrl-Shift-i`; 
-    1. open "Settings", `F1`; 
-    1. Check "Enable custom formatters" under the "Console" section; 
+* [cljs-devtools](https://github.com/binaryage/cljs-devtools)
+    1. Open Chrome's DevTools,`Ctrl-Shift-i`;
+    1. open "Settings", `F1`;
+    1. Check "Enable custom formatters" under the "Console" section;
     1. close and re-open DevTools
 
 To create an application with the base template:
@@ -35,6 +35,7 @@ The optional profiles include:
 * [cljs.test](https://github.com/clojure/clojurescript/blob/master/src/main/cljs/cljs/test.cljs) and [doo](https://github.com/bensu/doo) (`+test`)
 * [garden](https://github.com/noprompt/garden) (`+garden`)
 * [less](https://github.com/montoux/lein-less) (`+less`)
+* [re-frame-trace](https://github.com/Day8/re-frame-trace) (`+trace`)
 * [re-frisk](https://github.com/flexsurfer/re-frisk) (`+re-frisk`)
 
 To add a profile to the base template, just append the profile name (let's use `+server` as an example):
@@ -46,7 +47,7 @@ lein new re-frame-7theta <project-name> +server
 Any combination of profiles can be added at once:
 
 ```
-lein new re-frame-7theta <project-name> +garden +test +less +re-frisk
+lein new re-frame-7theta <project-name> +garden +test +less +trace +re-frisk
 ```
 
 ## Development Mode

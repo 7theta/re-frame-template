@@ -1,9 +1,9 @@
 (defproject {{ns-name}} "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.908"]
+                 [org.clojure/clojurescript "1.9.946"]
 
                  [reagent "0.7.0"]
-                 [re-frame "0.10.1"]{{#garden?}}
+                 [re-frame "0.10.2"]{{#garden?}}
                  [garden "1.3.2"]{{/garden?}}{{#server?}}
 
                  [http-kit "2.2.0"]
@@ -12,11 +12,11 @@
                  [ring/ring-anti-forgery "1.1.0"]
                  [compojure "1.6.0"]{{#via?}}
 
-                 [com.7theta/re-frame-via-fx "0.2.5"]{{/via?}}
+                 [com.7theta/re-frame-via-fx "0.2.6"]{{/via?}}
 
                  [integrant "0.6.1"]
                  [clojure-future-spec "1.9.0-beta4"]
-                 [yogthos/config "0.8"]{{/server?}}]
+                 [yogthos/config "0.9"]{{/server?}}]
   :min-lein-version "2.5.3"{{#server?}}
   :source-paths ["src/clj"]{{/server?}}
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"{{#test?}}
@@ -24,12 +24,13 @@
                                     "resources/public/css"{{/garden?}}]
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
   :profiles {:dev {:source-paths ["dev/clj"]
-                   :dependencies [{{#re-frisk?}}[re-frisk "0.4.5"]
+                   :dependencies [{{#trace?}}[day8.re-frame/trace "0.1.12"]
+                                  {{/trace?}}{{#re-frisk?}}[re-frisk "0.5.2"]
                                   {{/re-frisk?}}[ns-tracker "0.3.1"]
-                                  [binaryage/devtools "0.9.4"]
-                                  [figwheel-sidecar "0.5.13"]
+                                  [binaryage/devtools "0.9.7"]
+                                  [figwheel-sidecar "0.5.14"]
                                   [com.cemerick/piggieback "0.2.2"]{{#server?}}
-                                  [ring/ring-devel "1.6.2"]
+                                  [ring/ring-devel "1.6.3"]
                                   [integrant/repl "0.2.0"]{{/server?}}]
                    :plugins [[lein-cljsbuild "1.1.7" :exclusions [org.apache.commons/commons-compress]]{{#garden?}}
                              [lein-garden "0.3.0" :exclusions [org.clojure/clojure]]{{/garden?}}{{#less?}}
@@ -49,7 +50,10 @@
                                    :output-dir "resources/public/js/compiled/out"
                                    :asset-path "js/compiled/out"
                                    :source-map-timestamp true
-                                   :preloads [devtools.preload]
+                                   :preloads [devtools.preload{{#trace?}}
+                                              day8.re-frame.trace.preload{{/trace?}}{{#re-frisk?}}
+                                              re-frisk.preload{{/re-frisk?}}]{{#trace?}}
+                                   :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}{{/trace?}}
                                    :external-config {:devtools/config {:features-to-install :all}}}}
                        {:id "min"
                         :source-paths ["src/cljs" "prod/cljs"]

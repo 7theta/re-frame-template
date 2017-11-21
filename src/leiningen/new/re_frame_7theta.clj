@@ -26,7 +26,7 @@
 ;;; Public
 
 (def available-options
-  #{"+server" "+via" "+re-frisk" "+test" "+garden" "+less"})
+  #{"+server" "+via" "+trace" "+re-frisk" "+test" "+garden" "+less"})
 
 (defn re-frame-7theta
   [name & options]
@@ -56,6 +56,7 @@
    :sanitized (name-to-path name)
    :server? (helpers/option-renderer options :server)
    :via? (helpers/option-renderer options :via)
+   :trace? (helpers/option-renderer options :trace)
    :re-frisk? (helpers/option-renderer options :re-frisk)
    :test? (helpers/option-renderer options :test)
    :garden? (helpers/option-renderer options :garden)

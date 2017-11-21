@@ -1,7 +1,5 @@
-(ns {{ns-name}}.setup{{#re-frisk?}}
-    (:require [re-frisk.core :refer [enable-re-frisk!]]){{/re-frisk?}})
+(ns {{ns-name}}.setup)
 
 (defn setup-env []
-  (enable-console-print!){{#re-frisk?}}
-  (enable-re-frisk!){{/re-frisk?}}
+  (enable-console-print!)
   (println "Running in dev mode"))
