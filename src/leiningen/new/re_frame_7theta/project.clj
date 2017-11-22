@@ -35,7 +35,7 @@
                    :plugins [[lein-cljsbuild "1.1.7" :exclusions [org.apache.commons/commons-compress]]{{#garden?}}
                              [lein-garden "0.3.0" :exclusions [org.clojure/clojure]]{{/garden?}}{{#less?}}
                              [lein-less "1.7.5"]{{/less?}}
-                             [lein-figwheel "0.5.13" :exclusions [org.clojure/clojure]]{{#test?}}
+                             [lein-figwheel "0.5.14" :exclusions [org.clojure/clojure]]{{#test?}}
                              [lein-doo "0.1.7"]{{/test?}}]}{{#server?}}
              :uberjar {:source-paths ["prod/clj"]
                        :main {{name}}.server
