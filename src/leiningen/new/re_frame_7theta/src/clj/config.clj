@@ -4,11 +4,11 @@
               [integrant.core :as ig]){{/via?}})
 
 (def config{{^via?}} {}{{/via?}}{{#via?}}
-  {:via.server.client-proxy/client-proxy
+  {:via.server/client-proxy
    {:sente-web-server-adapter (get-sch-adapter)}
 
-   :via.server.router/router
+   :via.server/router
    {:msg-handler msg-handler
-    :client-proxy (ig/ref :via.server.client-proxy/client-proxy)}}{{/via?}}){{#via?}}
+    :client-proxy (ig/ref :via.server/client-proxy)}}{{/via?}}){{#via?}}
 
 (ig/load-namespaces config){{/via?}}

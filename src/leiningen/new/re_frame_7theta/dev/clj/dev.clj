@@ -12,11 +12,13 @@
 
             [figwheel-sidecar.system :as fig]
 
-            [clojure.tools.namespace.repl :refer [refresh refresh-all]]
+            [clojure.tools.namespace.repl :refer [refresh refresh-all disable-reload!]]
             [clojure.repl :refer [apropos dir doc find-doc pst source]]
             [clojure.test :refer [run-tests run-all-tests]]
             [clojure.pprint :refer [pprint]]
             [clojure.reflect :refer [reflect]]))
+
+(disable-reload! (find-ns 'integrant.core))
 
 {{#via?}}
 (def dev-config (assoc config :figwheel {:client-proxy

@@ -12,7 +12,7 @@
                  [ring/ring-anti-forgery "1.1.0"]
                  [compojure "1.6.0"]{{#via?}}
 
-                 [com.7theta/re-frame-via-fx "0.2.6"]{{/via?}}
+                 [com.7theta/re-frame-via-fx "0.2.7"]{{/via?}}
 
                  [integrant "0.6.1"]
                  [clojure-future-spec "1.9.0-beta4"]
