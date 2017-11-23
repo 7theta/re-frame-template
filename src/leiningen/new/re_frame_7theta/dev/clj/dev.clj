@@ -22,7 +22,7 @@
 
 {{#via?}}
 (def dev-config (assoc config :figwheel {:client-proxy
-                                         (ig/ref :via.server.client-proxy/client-proxy)}))
+                                         (ig/ref :via.server/client-proxy)}))
 {{/via?}}
 {{^via?}}
 (def dev-config (assoc config :figwheel nil))

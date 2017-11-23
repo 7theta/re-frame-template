@@ -9,4 +9,4 @@
 (defn -main [& args]
   (let [port (Integer/parseInt (or (env :port) "8080"))
         app (ig/init config)]
-    (run-server (handler (:via.server.client-proxy/client-proxy app)) {:port port})))
+    (run-server (handler (:via.server/client-proxy app)) {:port port})))
