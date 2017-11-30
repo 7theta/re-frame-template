@@ -47,7 +47,7 @@ lein new re-frame-7theta <project-name> +server
 Any combination of profiles can be added at once:
 
 ```
-lein new re-frame-7theta <project-name> +garden +test +less +trace +re-frisk
+lein new re-frame-7theta <project-name> +garden +test +less +trace
 ```
 
 ## Development Mode

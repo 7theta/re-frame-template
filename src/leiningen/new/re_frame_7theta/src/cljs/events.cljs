@@ -5,7 +5,7 @@
               [re-frame.core :refer [reg-event-db reg-event-fx]]))
 
 {{#via?}}
-(via-fx/register (:via.client.server-proxy/server-proxy app))
+(via-fx/register (:via.client/server-proxy app))
 
 {{/via?}}
 (reg-event-db
