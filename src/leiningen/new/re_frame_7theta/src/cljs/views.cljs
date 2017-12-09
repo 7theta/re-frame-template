@@ -1,7 +1,11 @@
 (ns {{ns-name}}.views
-    (:require [re-frame.core :refer [subscribe dispatch]]))
+    (:require {{#reflecti?}}[reflecti.ant-design :as antd]
+              {{/reflecti?}}[re-frame.core :refer [subscribe dispatch]]))
 
 (defn main-panel []
   (let [name (subscribe [:name])]
     (fn []
-      [:div "Hello from " @name])))
+      {{#reflecti?}}[antd/locale-provider
+                     {:locale (.-en_US antd/locales)}
+                     [:div "Hello from " @name]]{{/reflecti?}}{{^reflecti?}}
+      [:div "Hello from " @name]{{/reflecti?}})))

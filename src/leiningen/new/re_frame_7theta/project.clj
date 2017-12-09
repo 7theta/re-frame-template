@@ -1,21 +1,21 @@
 (defproject {{ns-name}} "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.8.0"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
 
                  [reagent "0.7.0"]
                  [re-frame "0.10.2"]{{#garden?}}
-                 [garden "1.3.2"]{{/garden?}}{{#server?}}
+                 [garden "1.3.3"]{{/garden?}}{{#server?}}
 
                  [http-kit "2.2.0"]
-                 [ring/ring-core "1.6.2"{{#via?}} :exclusions [commons-codec]{{/via?}}]
+                 [ring/ring-core "1.6.3"{{#via?}} :exclusions [commons-codec]{{/via?}}]
                  [ring/ring-defaults "0.3.1"]
                  [ring/ring-anti-forgery "1.1.0"]
                  [compojure "1.6.0"]{{#via?}}
 
-                 [com.7theta/re-frame-via-fx "0.2.7"]{{/via?}}
+                 [com.7theta/re-frame-via-fx "0.2.9"]{{/via?}}{{#reflecti?}}
+                 [com.7theta/reflecti "1.1.2"]{{/reflecti?}}
 
-                 [integrant "0.6.1"]
-                 [clojure-future-spec "1.9.0-beta4"]
+                 [integrant "0.6.2"]
                  [yogthos/config "0.9"]{{/server?}}]
   :min-lein-version "2.5.3"{{#server?}}
   :source-paths ["src/clj"]{{/server?}}
@@ -24,10 +24,9 @@
                                     "resources/public/css"{{/garden?}}]
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
   :profiles {:dev {:source-paths ["dev/clj"]
-                   :dependencies [{{#trace?}}[day8.re-frame/trace "0.1.12"]
-                                  {{/trace?}}{{#re-frisk?}}[re-frisk "0.5.2"]
-                                  {{/re-frisk?}}[ns-tracker "0.3.1"]
-                                  [binaryage/devtools "0.9.7"]
+                   :dependencies [{{#trace?}}[day8.re-frame/trace "0.1.13"]
+                                  {{/trace?}}[ns-tracker "0.3.1"]
+                                  [binaryage/devtools "0.9.8"]
                                   [figwheel-sidecar "0.5.14"]
                                   [com.cemerick/piggieback "0.2.2"]{{#server?}}
                                   [ring/ring-devel "1.6.3"]
@@ -51,8 +50,7 @@
                                    :asset-path "js/compiled/out"
                                    :source-map-timestamp true
                                    :preloads [devtools.preload{{#trace?}}
-                                              day8.re-frame.trace.preload{{/trace?}}{{#re-frisk?}}
-                                              re-frisk.preload{{/re-frisk?}}]{{#trace?}}
+                                              day8.re-frame.trace.preload{{/trace?}}]{{#trace?}}
                                    :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}{{/trace?}}
                                    :external-config {:devtools/config {:features-to-install :all}}}}
                        {:id "min"

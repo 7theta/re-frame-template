@@ -32,11 +32,11 @@ The optional profiles include:
 
 * [compojure](https://github.com/weavejester/compojure) (`+server`)
 * [via](https://github.com/7theta/via) (`+via`) implies (`+server`)
+* [reflecti](https://github.com/7theta/reflecti) (`+reflecti`)
 * [cljs.test](https://github.com/clojure/clojurescript/blob/master/src/main/cljs/cljs/test.cljs) and [doo](https://github.com/bensu/doo) (`+test`)
 * [garden](https://github.com/noprompt/garden) (`+garden`)
 * [less](https://github.com/montoux/lein-less) (`+less`)
 * [re-frame-trace](https://github.com/Day8/re-frame-trace) (`+trace`)
-* [re-frisk](https://github.com/flexsurfer/re-frisk) (`+re-frisk`)
 
 To add a profile to the base template, just append the profile name (let's use `+server` as an example):
 
