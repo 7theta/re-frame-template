@@ -13,7 +13,7 @@
                  [compojure "1.6.0"]{{#via?}}
 
                  [com.7theta/re-frame-via-fx "0.2.9"]{{/via?}}{{#reflecti?}}
-                 [com.7theta/reflecti "1.1.2"]{{/reflecti?}}
+                 [com.7theta/reflecti "1.2.0"]{{/reflecti?}}
 
                  [integrant "0.6.2"]
                  [yogthos/config "0.9"]{{/server?}}]
