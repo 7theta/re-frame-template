@@ -2,7 +2,9 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
 
-                 [reagent "0.7.0"]
+                 [reagent "0.8.0-alpha2"{{#reflecti?}}
+                  :exclusions [cljsjs/react cljsjs/react-dom
+                               cljsjs/react-dom-server]{{/reflecti?}}]
                  [re-frame "0.10.2"]{{#garden?}}
                  [garden "1.3.3"]{{/garden?}}{{#server?}}
 
@@ -12,7 +14,7 @@
                  [ring/ring-anti-forgery "1.1.0"]
                  [compojure "1.6.0"]{{#via?}}
 
-                 [com.7theta/re-frame-via-fx "0.2.9"]{{/via?}}{{#reflecti?}}
+                 [com.7theta/re-frame-via-fx "0.2.10"]{{/via?}}{{#reflecti?}}
                  [com.7theta/reflecti "1.2.0"]{{/reflecti?}}
 
                  [integrant "0.6.2"]
