@@ -15,7 +15,7 @@
                  [compojure "1.6.0"]{{#via?}}
 
                  [com.7theta/re-frame-via-fx "0.2.10"]{{/via?}}{{#reflecti?}}
-                 [com.7theta/reflecti "1.2.0"]{{/reflecti?}}
+                 [com.7theta/reflecti "1.2.1"]{{/reflecti?}}
 
                  [integrant "0.6.2"]
                  [yogthos/config "0.9"]{{/server?}}]
@@ -31,7 +31,6 @@
                                   [binaryage/devtools "0.9.8"]
                                   [figwheel-sidecar "0.5.14"]
                                   [com.cemerick/piggieback "0.2.2"]{{#server?}}
-                                  [ring/ring-devel "1.6.3"]
                                   [integrant/repl "0.2.0"]{{/server?}}]
                    :plugins [[lein-cljsbuild "1.1.7" :exclusions [org.apache.commons/commons-compress]]{{#garden?}}
                              [lein-garden "0.3.0" :exclusions [org.clojure/clojure]]{{/garden?}}{{#less?}}
