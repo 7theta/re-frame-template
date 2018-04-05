@@ -32,6 +32,7 @@ The optional profiles include:
 
 * [compojure](https://github.com/weavejester/compojure) (`+server`)
 * [via](https://github.com/7theta/via) (`+via`) implies (`+server`)
+* [authentication](https://github.com/7theta/re-frame-via) (`+auth`) implies (`+via`)
 * [reflecti](https://github.com/7theta/reflecti) (`+reflecti`)
 * [cljs.test](https://github.com/clojure/clojurescript/blob/master/src/main/cljs/cljs/test.cljs) and [doo](https://github.com/bensu/doo) (`+test`)
 * [garden](https://github.com/noprompt/garden) (`+garden`)

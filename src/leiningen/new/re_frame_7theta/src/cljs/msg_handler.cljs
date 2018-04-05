@@ -1,23 +1,29 @@
-(ns {{ns-name}}.msg-handler)
+(ns {{ns-name}}.msg-handler
+    (:require [re-frame.core :refer [dispatch]]))
 
 (defmulti msg-handler :id)
+
+;; Web Socket Life cycle
 
 (defmethod msg-handler :chsk/state
   [{:as ev-msg :keys [?data]}]
   (let [[old-state new-state] ?data]
     (if (:open? new-state)
-      (js/console.log "Socket connected")
-      (js/console.log "Socket disconnected"))))
+      (dispatch [:ws/connected])
+      (dispatch [:ws/disconnected]))))
 
 (defmethod msg-handler :chsk/recv
   [{:as ev-msg :keys [?data]}]
-  (js/console.log "Server Push: " (str ?data)))
+  (when-not (= :chsk/ws-ping (first ?data))
+    (dispatch ?data)))
 
 (defmethod msg-handler :chsk/handshake
   [{:as ev-msg :keys [?data]}]
   (let [[?uid ?csrf-token ?handshake-data] ?data]
-    (js/console.log "Handshake: " (str ?data))))
+    (js/console.info "Handshake: " (pr-str ?data))))
+
+;; API
 
 (defmethod msg-handler :default
   [{:as ev-msg :keys [event]}]
-  (js/console.log "Unhandled event: " (str event)))
+  (js/console.info "Unhandled event: " (str event)))

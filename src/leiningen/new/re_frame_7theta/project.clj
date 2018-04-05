@@ -1,39 +1,43 @@
 (defproject {{ns-name}} "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.9.946"]
+                 [org.clojure/clojurescript  "1.10.238" {{#via?}}:exclusions [com.cognitect/transit-clj]{{/via?}}]
 
-                 [reagent "0.8.0-alpha2"{{#reflecti?}}
+                 {{#reflecti?}}[com.7theta/reflecti "1.4.0"]{{/reflecti?}}{{^reflecti?}}
+                 [reagent "0.8.0-alpha2"
                   :exclusions [cljsjs/react cljsjs/react-dom
-                               cljsjs/react-dom-server]{{/reflecti?}}]
-                 [re-frame "0.10.2"]{{#garden?}}
+                               cljsjs/react-dom-server]]
+                 [cljsjs/react-dom "16.3.0-1"]
+                 [cljsjs/react "16.3.0-1"]
+                 {{/reflecti?}}
+                 [re-frame "0.10.5"]{{#garden?}}
                  [garden "1.3.3"]{{/garden?}}{{#server?}}
 
                  [http-kit "2.2.0"]
                  [ring/ring-core "1.6.3"{{#via?}} :exclusions [commons-codec]{{/via?}}]
                  [ring/ring-defaults "0.3.1"]
-                 [ring/ring-anti-forgery "1.1.0"]
+                 [ring/ring-anti-forgery "1.2.0"]
                  [compojure "1.6.0"]{{#via?}}
 
-                 [com.7theta/re-frame-via-fx "0.2.11"]{{/via?}}{{#reflecti?}}
-                 [com.7theta/reflecti "1.2.1"]{{/reflecti?}}
+                 [com.7theta/re-frame-via "0.3.0"]{{/via?}}
+                 [com.7theta/re-frame-fx "0.2.0"]
 
                  [integrant "0.6.3"]
-                 [yogthos/config "0.9"]{{/server?}}]{{#server?}}
+                 [yogthos/config "1.1.1"]{{/server?}}]{{#server?}}
   :source-paths ["src/clj"]{{/server?}}
   :clean-targets ^{:protect false} ["target" "resources/public/js/compiled"{{#test?}}
                                     "test/js"{{/test?}}{{#garden?}}
                                     "resources/public/css"{{/garden?}}]
   :profiles {:dev {:source-paths ["dev/clj"]
-                   :dependencies [[binaryage/devtools "0.9.8"]
-                                  [figwheel-sidecar "0.5.14"]
+                   :dependencies [[binaryage/devtools "0.9.9"]
+                                  [figwheel-sidecar "0.5.15"]
                                   [com.cemerick/piggieback "0.2.2"]{{#server?}}
-                                  [integrant/repl "0.3.0"]{{/server?}}{{#trace?}}
-                                  [day8.re-frame/trace "0.1.13"]{{/trace?}}]
+                                  [integrant/repl "0.3.1"]{{/server?}}{{#trace?}}
+                                  [day8.re-frame/re-frame-10x "0.3.0-2-react16"]{{/trace?}}]
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                    :plugins [[lein-cljsbuild "1.1.7" :exclusions [org.apache.commons/commons-compress]]{{#garden?}}
                              [lein-garden "0.3.0" :exclusions [org.clojure/clojure]]{{/garden?}}{{#less?}}
                              [lein-less "1.7.5"]{{/less?}}
-                             [lein-figwheel "0.5.14" :exclusions [org.clojure/clojure]]{{#test?}}
+                             [lein-figwheel "0.5.15" :exclusions [org.clojure/clojure]]{{#test?}}
                              [lein-doo "0.1.7"]{{/test?}}]}{{#server?}}
              :uberjar {:source-paths ["prod/clj"]
                        :main {{name}}.server
@@ -49,7 +53,7 @@
                                    :asset-path "js/compiled/out"
                                    :source-map-timestamp true
                                    :preloads [devtools.preload{{#trace?}}
-                                              day8.re-frame.trace.preload{{/trace?}}]{{#trace?}}
+                                              day8.re-frame-10x.preload{{/trace?}}]{{#trace?}}
                                    :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}{{/trace?}}
                                    :external-config {:devtools/config {:features-to-install :all}}}}
                        {:id "min"

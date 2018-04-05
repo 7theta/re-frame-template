@@ -2,4 +2,4 @@
     (:require [{{ns-name}}.config :refer [config]]
               [integrant.core :as ig]))
 
-(defonce app (ig/init config))
+(defonce app (atom (ig/init config)))

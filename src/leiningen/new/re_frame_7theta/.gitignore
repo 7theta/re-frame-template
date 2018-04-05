@@ -7,6 +7,8 @@ pom.xml.asc
 lib/
 classes/
 target/
+resources/public/js/compiled/
+figwheel_server.log
 out/
 checkouts/
 .lein-deps-sum
