@@ -2,7 +2,6 @@
   "Tools for interactive development with the REPL. This file should
   not be included in a production build of the application."
   (:require [{{ns-name}}.config :refer [config]]
-            [{{ns-name}}.handler :refer [handler]]
 
             [integrant.core :as ig]
             [com.stuartsierra.component :as component] ; Figwheel dependency
@@ -20,23 +19,25 @@
 
 (disable-reload! (find-ns 'integrant.core))
 
-{{#via?}}
-(def dev-config (assoc config :figwheel {:client-proxy
-                                         (ig/ref :via.server/client-proxy)}))
-{{/via?}}
-{{^via?}}
-(def dev-config (assoc config :figwheel nil))
-{{/via?}}
+{{#server?}}
+(def dev-config
+  (assoc
+   config :figwheel
+   {:ring-handler
+    (ig/ref :{{ns-name}}/ring-handler)}))
+{{/server?}}
 
-(defmethod ig/init-key :figwheel [_ {:keys [client-proxy]}]
+{{^server?}}
+(def dev-config (assoc config :figwheel nil))
+{{/server?}}
+
+(defmethod ig/init-key :figwheel [_ {:keys [ring-handler]}]
   (component/start
    (component/system-map
     :figwheel-system (-> (fig/fetch-config)
-                         (assoc-in [:data :figwheel-options :ring-handler]
-                                   (handler{{#via?}} client-proxy{{/via?}}))
+                         (assoc-in [:data :figwheel-options :ring-handler] ring-handler)
                          fig/figwheel-system)
-    :css-watcher (fig/css-watcher
-                  {:watch-paths ["resources/public/css"]}))))
+    :css-watcher (fig/css-watcher {:watch-paths ["resources/public/css"]}))))
 
 (defmethod ig/halt-key! :figwheel [_ figwheel-system]
   (component/stop figwheel-system))
