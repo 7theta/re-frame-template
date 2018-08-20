@@ -14,7 +14,7 @@
 (defn files
   [data options]
   (concat
-   [["src/clj/{{sanitized}}/handler.clj" (helpers/render "src/clj/handler.clj" data)]
+   [["src/clj/{{sanitized}}/ring_handler.clj" (helpers/render "src/clj/ring_handler.clj" data)]
     ["src/clj/{{sanitized}}/config.clj" (helpers/render "src/clj/config.clj" data)]
 
     ["dev/clj/user.clj" (helpers/render "dev/clj/user.clj" data)]
@@ -26,5 +26,7 @@
     ["src/cljs/{{sanitized}}/app.cljs" (helpers/render "src/cljs/app.cljs" data)]
     ["src/cljs/{{sanitized}}/core.cljs" (helpers/render "src/cljs/core.cljs" data)]]
    (when (options :via)
-     [["src/clj/{{sanitized}}/msg_handler.clj" (helpers/render "src/clj/msg_handler.clj" data)]
-      ["src/cljs/{{sanitized}}/msg_handler.cljs" (helpers/render "src/cljs/msg_handler.cljs" data)]])))
+     [["src/cljs/{{sanitized}}/client.cljs" (helpers/render "src/cljs/client.cljs" data)]
+      ["src/clj/{{sanitized}}/subs.clj" (helpers/render "src/clj/subs.clj" data)]])
+   (when (options :auth)
+     [["src/clj/{{sanitized}}/user_store.clj" (helpers/render "src/clj/user_store.clj" data)]])))

@@ -4,10 +4,14 @@
 
 {{#auth?}}
 (reg-sub
- :authenticated?
- (fn [db] (:authenticated db)))
-{{/auth?}}{{^auth?}}
+ :{{ns-name}}/authenticated?
+ (fn [db]
+   (-> db :authenticated :token)))
+{{/auth?}}
+
+{{^auth?}}
 (reg-sub
  :name
  (fn [db]
-   (:name db))){{/auth?}}
+   (:name db)))
+{{/auth?}}

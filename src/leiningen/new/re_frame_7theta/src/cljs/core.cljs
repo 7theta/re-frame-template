@@ -1,6 +1,6 @@
 (ns {{ns-name}}.core
-    (:require {{#server?}}[{{ns-name}}.app :refer [app]]
-              {{/server?}}[{{ns-name}}.setup :refer [setup-env]]
+    (:require {{#server?}}[{{ns-name}}.app :refer [app]]{{/server?}}
+              [{{ns-name}}.setup :refer [setup-env]]
               [{{ns-name}}.events]
               [{{ns-name}}.subs]
               [{{ns-name}}.views :as views]

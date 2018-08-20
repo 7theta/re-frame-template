@@ -1,13 +1,28 @@
 (ns {{ns-name}}.config{{#via?}}
-    (:require [{{ns-name}}.msg-handler :refer [msg-handler]]
-              [via.client.server-proxy]
-              [via.client.router]
+    (:require [via.endpoint :as via]
+              [via.events]
+              [via.subs]
+              [via.fx]
+              [{{ns-name}}.client]
               [integrant.core :as ig]){{/via?}})
 
-(def config{{^via?}} {}{{/via?}}{{#via?}}
-  {:via.client/server-proxy
-   nil
+;;; Public
 
-   :via.client/router
-   {:msg-handler msg-handler
-    :server-proxy (ig/ref :via.client/server-proxy)}}{{/via?}})
+(def config
+  {{^via?}}{}{{/via?}}
+  {{#via?}}
+  {:via/endpoint
+   {}
+
+   :via/events
+   {:endpoint (ig/ref :via/endpoint)}
+
+   :via/subs
+   {:endpoint (ig/ref :via/endpoint)}
+
+   :via/fx
+   {:endpoint (ig/ref :via/endpoint)}
+
+   :{{ns-name}}/test-client
+   {:endpoint (ig/ref :via/endpoint)}}
+  {{/via?}})

@@ -2,32 +2,32 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript  "1.10.238" {{#via?}}:exclusions [com.cognitect/transit-clj]{{/via?}}]
 
-                 {{#reflecti?}}[com.7theta/reflecti "1.4.0"]{{/reflecti?}}{{^reflecti?}}
-                 [reagent "0.8.0-alpha2"
-                  :exclusions [cljsjs/react cljsjs/react-dom
+                 {{#reflecti?}}[com.7theta/reflecti "1.7.2"]{{/reflecti?}}
+                 {{^reflecti?}}
+                 [reagent "0.8.1"
+                  :exclusions [cljsjs/react
+                               cljsjs/react-dom
                                cljsjs/react-dom-server]]
-                 [cljsjs/react-dom "16.3.0-1"]
-                 [cljsjs/react "16.3.0-1"]
+                 [cljsjs/react-dom "16.4.1-0"]
+                 [cljsjs/react "16.4.1-0"]
                  {{/reflecti?}}
-                 [re-frame "0.10.5"]{{#garden?}}
-                 [garden "1.3.3"]{{/garden?}}{{#server?}}
-
-                 [http-kit "2.2.0"]
+                 [re-frame "0.10.5"]
+                 {{#garden?}}[garden "1.3.5"]{{/garden?}}
+                 {{#server?}}
+                 [http-kit "2.3.0"]
                  [ring/ring-core "1.6.3"{{#via?}} :exclusions [commons-codec]{{/via?}}]
                  [ring/ring-defaults "0.3.1"]
                  [ring/ring-anti-forgery "1.2.0"]
-                 [compojure "1.6.0"]{{#via?}}
-
-                 [com.7theta/re-frame-via "0.3.0"]{{/via?}}
-                 [com.7theta/re-frame-fx "0.2.0"]
+                 [compojure "1.6.0"]
+                 {{#via?}}[com.7theta/via "1.0.1"]{{/via?}}
 
                  [integrant "0.6.3"]
-                 [yogthos/config "1.1.1"]{{/server?}}]{{#server?}}
-  :source-paths ["src/clj"]{{/server?}}
+                 [yogthos/config "1.1.1"]
+                 {{/server?}}]
   :clean-targets ^{:protect false} ["target" "resources/public/js/compiled"{{#test?}}
                                     "test/js"{{/test?}}{{#garden?}}
                                     "resources/public/css"{{/garden?}}]
-  :profiles {:dev {:source-paths ["dev/clj"]
+  :profiles {:dev {:source-paths ["dev/clj" {{#server?}}"src/clj"{{/server?}}]
                    :dependencies [[binaryage/devtools "0.9.9"]
                                   [figwheel-sidecar "0.5.15"]
                                   [com.cemerick/piggieback "0.2.2"]{{#server?}}
@@ -39,7 +39,7 @@
                              [lein-less "1.7.5"]{{/less?}}
                              [lein-figwheel "0.5.15" :exclusions [org.clojure/clojure]]{{#test?}}
                              [lein-doo "0.1.7"]{{/test?}}]}{{#server?}}
-             :uberjar {:source-paths ["prod/clj"]
+             :uberjar {:source-paths ["prod/clj" {{#server?}}"src/clj"{{/server?}}]
                        :main {{name}}.server
                        :aot :all
                        :prep-tasks [["cljsbuild" "once" "min"]]
