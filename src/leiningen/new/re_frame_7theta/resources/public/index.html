@@ -16,7 +16,8 @@
         <span class="sr-only">Loading...</span>
       </div>{{/reflecti?}}
     </div>
-    <script src="js/compiled/app.js"></script>
+    {{#reflecti?}}<script src="js/less.min.js" type="text/javascript"></script>{{/reflecti?}}
+    <script src="js/compiled/main.js"></script>
     <script>{{sanitized}}.core.init();</script>
   </body>
 </html>

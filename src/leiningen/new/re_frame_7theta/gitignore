@@ -16,7 +16,7 @@ checkouts/
 .lein-plugins/
 .lein-failures
 .nrepl-port
-
+.shadow-cljs
 
 ### Emacs ###
 # -*- mode: gitignore; -*-

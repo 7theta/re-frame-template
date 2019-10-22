@@ -13,4 +13,4 @@
 
 (defn files
   [data options]
-  [["src/cljs/{{sanitized}}/views.cljs" (helpers/render "src/cljs/views.cljs" data)]])
+  [["src/{{sanitized}}/views.cljs" (helpers/render "src/views.cljs" data)]])

@@ -14,10 +14,7 @@
             [leiningen.new.options.helpers :as helpers]
             [leiningen.new.options.base :as base]
             [leiningen.new.options.views :as views]
-            [leiningen.new.options.garden :as garden]
-            [leiningen.new.options.less :as less]
-            [leiningen.new.options.server :as server]
-            [leiningen.new.options.test :as test]
+            [leiningen.new.options.via :as via]
             [clojure.set :as set]
             [clojure.string :as st]))
 
@@ -26,7 +23,7 @@
 ;;; Public
 
 (def available-options
-  #{"+server" "+via" "+auth" "+reflecti" "+trace" "+test" "+garden" "+less"})
+  #{"+auth" "+reflecti" "+trace"})
 
 (defn re-frame-7theta
   [name & options]
@@ -36,8 +33,7 @@
                      (map #(keyword (apply str (rest %))))
                      set)
         options (cond-> options
-                  (options :auth) (conj :via)
-                  (options :via) (conj :server))
+                  (options :auth) (conj :via))
         data (template-data name options)]
     (main/info "Generating re-frame project with 7theta template.")
     (apply ->files data (app-files data options))))
@@ -56,21 +52,13 @@
   {:name name
    :ns-name (sanitize-ns name)
    :sanitized (name-to-path name)
-   :server? (helpers/option-renderer options :server)
-   :via? (helpers/option-renderer options :via)
    :auth? (helpers/option-renderer options :auth)
    :reflecti? (helpers/option-renderer options :reflecti)
-   :trace? (helpers/option-renderer options :trace)
-   :test? (helpers/option-renderer options :test)
-   :garden? (helpers/option-renderer options :garden)
-   :less? (helpers/option-renderer options :less)})
+   :trace? (helpers/option-renderer options :trace)})
 
 (defn app-files
   [data options]
   (concat
    (base/files data options)
    (views/files data options)
-   (when (options :server) (server/files data options))
-   (when (options :test) (test/files data options))
-   (when (options :garden) (garden/files data options))
-   (when (options :less) (less/files data options))))
+   (via/files data options)))

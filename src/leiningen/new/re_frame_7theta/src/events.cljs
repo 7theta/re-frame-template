@@ -1,19 +1,13 @@
 (ns {{ns-name}}.events
-    (:require {{#server?}}[{{ns-name}}.app :refer [reset-app!]]{{/server?}}
+    (:require [{{ns-name}}.app :refer [reset-app!]]
               [{{ns-name}}.db :as db]
-              {{#via?}}
-              [via.events :refer [reg-event-via]]
-              [via.fx :as via-fx]
-              [via.endpoint :as via]
-              {{/via?}}
+              [via.fx]
               [re-frame.core :refer [reg-event-db reg-event-fx]]))
 
 (reg-event-db
  :initialize-db
  (fn [_ _]
    db/default-db))
-
-{{#via?}}
 
 {{#auth?}}
 (reg-event-fx
@@ -48,5 +42,3 @@
    (reset-app!)
    {:dispatch [:initialize-db]}))
 {{/auth?}}
-
-{{/via?}}

@@ -1,5 +1,5 @@
 (ns {{ns-name}}.core
-    (:require {{#server?}}[{{ns-name}}.app :refer [app]]{{/server?}}
+    (:require [{{ns-name}}.app :refer [app]]
               [{{ns-name}}.setup :refer [setup-env]]
               [{{ns-name}}.events]
               [{{ns-name}}.subs]

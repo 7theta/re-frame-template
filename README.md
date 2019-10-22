@@ -3,10 +3,9 @@
 [![Current Version](https://img.shields.io/clojars/v/re-frame-7theta/lein-template.svg)](https://clojars.org/re-frame-7theta/lein-template)
 [![GitHub license](https://img.shields.io/github/license/7theta/re-frame-template.svg)](LICENSE)
 
-Leiningen template
-for [reagent](https://github.com/reagent-project/reagent) web apps
-that implements the [re-frame](https://github.com/Day8/re-frame)
-pattern.
+Leiningen template for
+[reagent](https://github.com/reagent-project/reagent) web apps that
+implements the [re-frame](https://github.com/Day8/re-frame) pattern. 
 
 This template is based on [re-frame-template](https://github.com/Day8/re-frame-template).
 
@@ -15,7 +14,8 @@ This template is based on [re-frame-template](https://github.com/Day8/re-frame-t
 The base template includes:
 
 * [re-frame](https://github.com/Day8/re-frame)
-* [figwheel](https://github.com/bhauman/lein-figwheel)
+* [via](https://github.com/7theta/via)
+* [shadow-cljs](http://shadow-cljs.org/)
 * [cljs-devtools](https://github.com/binaryage/cljs-devtools)
     1. Open Chrome's DevTools,`Ctrl-Shift-i`;
     1. open "Settings", `F1`;
@@ -30,73 +30,38 @@ lein new re-frame-7theta <project-name>
 
 The optional profiles include:
 
-* [compojure](https://github.com/weavejester/compojure) (`+server`)
-* [via](https://github.com/7theta/via) (`+via`) implies (`+server`)
 * [authentication](https://github.com/7theta/re-frame-via) (`+auth`) implies (`+via`)
 * [reflecti](https://github.com/7theta/reflecti) (`+reflecti`)
-* [cljs.test](https://github.com/clojure/clojurescript/blob/master/src/main/cljs/cljs/test.cljs) and [doo](https://github.com/bensu/doo) (`+test`)
-* [garden](https://github.com/noprompt/garden) (`+garden`)
-* [less](https://github.com/montoux/lein-less) (`+less`)
-* [re-frame-trace](https://github.com/Day8/re-frame-trace) (`+trace`)
+* [re-frame-10x](https://github.com/day8/re-frame-10x) (`+trace`)
 
-To add a profile to the base template, just append the profile name (let's use `+server` as an example):
+To add a profile to the base template, just append the profile name (let's use `+reflecti` as an example):
 
 ```
-lein new re-frame-7theta <project-name> +server
+lein new re-frame-7theta <project-name> +reflecti
 ```
 
 Any combination of profiles can be added at once:
 
 ```
-lein new re-frame-7theta <project-name> +garden +test +less +trace
+lein new re-frame-7theta <project-name> +test +trace
 ```
 
-## Development Mode
-
-### Start Cider from Emacs (if using +cider):
-
-Put this in your Emacs config file:
-
-```
-(setq cider-cljs-lein-repl "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))")
-```
-
-Navigate to a clojurescript file and start a figwheel REPL with `cider-jack-in-clojurescript` or (`C-c M-J`)
-
-### Compile css (if using +garden or +less):
-
-Compile css file once.
-
-```
-lein garden once
-```
-
-or
-
-```
-lein less once
-```
-
-Automatically recompile css file on change.
-
-```
-lein garden auto
-```
-
-or
-
-```
-lein less auto
-```
+## Development Build
 
 ### Run application:
 
+Install js dependencies
 ```
-lein clean
-lein figwheel dev
+npm install
 ```
 
-Figwheel will automatically push cljs changes to the browser.
+From a repl, run the following commands
+```
+user> (dev)
+dev> (go)
+```
+
+Shadow-cljs will automatically push cljs changes to the browser.
 
 Wait a bit, then browse to [http://localhost:3449](http://localhost:3449).
 
@@ -106,7 +71,10 @@ In _project-name.config_, there is a variable called `debug?`, which
 defaults to _true_. However, for the `min` build, this variable is
 re-defined to _false_.
 
-When `debug?` is true, we include `(enable-console-print!)`. If you wrap all of your `println`s with a `when` block as show below, then you will get logs printed to the browser's console for the `dev` build and not the `min` build.
+When `debug?` is true, we include `(enable-console-print!)`. If you
+wrap all of your `println`s with a `when` block as show below, then
+you will get logs printed to the browser's console for the `dev` build
+and not the `min` build. 
 
 ```clojure
 (when config/debug?
@@ -120,22 +88,19 @@ lein clean
 lein doo phantom test once
 ```
 
-The above command assumes that you have [phantomjs](https://www.npmjs.com/package/phantomjs) installed. However, please note that [doo](https://github.com/bensu/doo) can be configured to run cljs.test in many other JS environments (chrome, ie, safari, opera, slimer, node, rhino, or nashorn).
+The above command assumes that you have
+[phantomjs](https://www.npmjs.com/package/phantomjs)
+installed. However, please note that
+[doo](https://github.com/bensu/doo) can be configured to run cljs.test
+in many other JS environments (chrome, ie, safari, opera, slimer,
+node, rhino, or nashorn). 
 
 ## Production Build
 
-To compile clojurescript to javascript:
+To build the uberjar release
 
 ```
-lein clean
-lein cljsbuild once min
-```
-
-If you're using +handler
-
-```
-lein clean
-lein uberjar
+npm run build-release
 ```
 
 ## Copyright and License

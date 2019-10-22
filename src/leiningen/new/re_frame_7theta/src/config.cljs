@@ -1,16 +1,13 @@
-(ns {{ns-name}}.config{{#via?}}
+(ns {{ns-name}}.config
     (:require [via.endpoint :as via]
               [via.events]
               [via.subs]
               [via.fx]
-              [{{ns-name}}.client]
-              [integrant.core :as ig]){{/via?}})
+              [integrant.core :as ig]))
 
 ;;; Public
 
 (def config
-  {{^via?}}{}{{/via?}}
-  {{#via?}}
   {:via/endpoint
    {}
 
@@ -21,8 +18,4 @@
    {:endpoint (ig/ref :via/endpoint)}
 
    :via/fx
-   {:endpoint (ig/ref :via/endpoint)}
-
-   :{{ns-name}}/test-client
-   {:endpoint (ig/ref :via/endpoint)}}
-  {{/via?}})
+   {:endpoint (ig/ref :via/endpoint)}})
