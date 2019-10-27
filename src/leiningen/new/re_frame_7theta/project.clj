@@ -8,6 +8,7 @@
 
                  [integrant "0.7.0"]]
   :profiles {:dev {:source-paths ["dev"]
+                   :global-vars {*warn-on-reflection* true}
                    :dependencies [[com.google.javascript/closure-compiler-unshaded "v20190729"]
                                   [org.clojure/google-closure-library "0.0-20190213-2033d5d9"]
                                   [binaryage/devtools "0.9.10"]
