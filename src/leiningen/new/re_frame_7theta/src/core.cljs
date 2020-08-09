@@ -4,7 +4,7 @@
               [{{ns-name}}.events]
               [{{ns-name}}.subs]
               [{{ns-name}}.views :as views]
-              [reagent.core :as reagent]
+              [reagent.dom :as reagent]
               [re-frame.core :as re-frame]))
 
 (defn ^:dev/after-load mount-root []
