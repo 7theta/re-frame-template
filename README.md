@@ -30,20 +30,15 @@ lein new re-frame-7theta <project-name>
 
 The optional profiles include:
 
-* [authentication](https://github.com/7theta/re-frame-via) (`+auth`) implies (`+via`)
-* [reflecti](https://github.com/7theta/reflecti) (`+reflecti`)
+* [routing](https://github.com/metosin/reitit) (`+routing`) based on `metosin/reitit`
+* [authentication](https://github.com/7theta/re-frame-via) (`+auth`) based on `via`
+* [fontawesome](https://fontawesome.com/) (`+fontawesome`) - the font files must be copied in after the project has been generated
 * [re-frame-10x](https://github.com/day8/re-frame-10x) (`+trace`)
 
-To add a profile to the base template, just append the profile name (let's use `+reflecti` as an example):
+To add a profile to the base template, append the profile name(s). E.g.,
 
 ```
-lein new re-frame-7theta <project-name> +reflecti
-```
-
-Any combination of profiles can be added at once:
-
-```
-lein new re-frame-7theta <project-name> +test +trace
+lein new re-frame-7theta <project-name> +auth +trace
 ```
 
 ## Development Build
@@ -55,45 +50,20 @@ Install js dependencies
 npm install
 ```
 
+Build the dev dependencies
+```
+npm run build-dev
+```
+
 From a repl, run the following commands
 ```
 user> (dev)
 dev> (go)
 ```
 
-Shadow-cljs will automatically push cljs changes to the browser.
-
 Wait a bit, then browse to [http://localhost:3449](http://localhost:3449).
 
-### Logging:
-
-In _project-name.config_, there is a variable called `debug?`, which
-defaults to _true_. However, for the `min` build, this variable is
-re-defined to _false_.
-
-When `debug?` is true, we include `(enable-console-print!)`. If you
-wrap all of your `println`s with a `when` block as show below, then
-you will get logs printed to the browser's console for the `dev` build
-and not the `min` build. 
-
-```clojure
-(when config/debug?
-  (println "dev mode"))
-```
-
-### Run tests (if using +test):
-
-```
-lein clean
-lein doo phantom test once
-```
-
-The above command assumes that you have
-[phantomjs](https://www.npmjs.com/package/phantomjs)
-installed. However, please note that
-[doo](https://github.com/bensu/doo) can be configured to run cljs.test
-in many other JS environments (chrome, ie, safari, opera, slimer,
-node, rhino, or nashorn). 
+Shadow-cljs will automatically push cljs changes to the browser.
 
 ## Production Build
 
@@ -105,6 +75,6 @@ npm run build-release
 
 ## Copyright and License
 
-Copyright © 2015, 2016, 2017 7theta
+Copyright © 2015 7theta
 
 Distributed under the Eclipse Public License.

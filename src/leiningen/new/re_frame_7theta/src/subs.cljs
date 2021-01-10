@@ -2,12 +2,17 @@
     (:require-macros [reagent.ratom :refer [reaction]])
     (:require [re-frame.core :refer [reg-sub]]))
 
+{{#routing?}}
+(reg-sub
+ :application/route
+ (fn [db]
+   (:application/route db))) {{/routing?}}
+
 {{#auth?}}
 (reg-sub
- :{{ns-name}}/authenticated?
+ :application/authenticated?
  (fn [db]
-   (-> db :authenticated :token)))
-{{/auth?}}
+   (-> db :authenticated :token))){{/auth?}}
 
 {{^auth?}}
 (reg-sub

@@ -17,11 +17,12 @@
   [["README.md" (helpers/render "README.md" data)]
    ["project.clj" (helpers/render "project.clj" data)]
    ["package.json" (helpers/render "package.json" data)]
+   ["tailwind.config.js" (helpers/render "tailwind.config.js" data)]
    ["shadow-cljs.edn" (helpers/render "shadow-cljs.edn" data)]
    [".gitignore" (helpers/render "gitignore" data)]
 
+   ["resources/css/tailwind.css" (helpers/render "resources/css/tailwind.css" data)]
    ["resources/public/index.html" (helpers/render "resources/public/index.html" data)]
-   ["resources/public/js/less.min.js" (helpers/render "resources/public/js/less.min.js" data)]
 
    ["src/{{sanitized}}/core.cljs" (helpers/render "src/core.cljs" data)]
    ["src/{{sanitized}}/setup.cljs" (helpers/render "src/setup.cljs" data)]
@@ -29,6 +30,6 @@
    ["src/{{sanitized}}/subs.cljs" (helpers/render "src/subs.cljs" data)]
    ["src/{{sanitized}}/events.cljs" (helpers/render "src/events.cljs" data)]
 
-   ["dev//user.clj" (helpers/render "dev/user.clj" data)]
+   ["dev/user.clj" (helpers/render "dev/user.clj" data)]
    ["dev/dev.clj" (helpers/render "dev/dev.clj" data)]
    ["prod/{{sanitized}}/main.clj" (helpers/render "prod/main.clj" data)]])

@@ -23,7 +23,7 @@
 ;;; Public
 
 (def available-options
-  #{"+auth" "+reflecti" "+trace"})
+  #{"+routing" "+auth" "+fontawesome" "+trace"})
 
 (defn re-frame-7theta
   [name & options]
@@ -32,8 +32,6 @@
                      (filter (partial available-options))
                      (map #(keyword (apply str (rest %))))
                      set)
-        options (cond-> options
-                  (options :auth) (conj :via))
         data (template-data name options)]
     (main/info "Generating re-frame project with 7theta template.")
     (apply ->files data (app-files data options))))
@@ -52,8 +50,9 @@
   {:name name
    :ns-name (sanitize-ns name)
    :sanitized (name-to-path name)
+   :routing? (helpers/option-renderer options :routing)
    :auth? (helpers/option-renderer options :auth)
-   :reflecti? (helpers/option-renderer options :reflecti)
+   :fontawesome? (helpers/option-renderer options :fontawesome)
    :trace? (helpers/option-renderer options :trace)})
 
 (defn app-files

@@ -7,15 +7,16 @@
                    org.clojure/google-closure-library-third-party
                    com.cognitect/transit-clj]]
 
-                 {{#reflecti?}}[com.7theta/reflecti "2.4.0"]
-                 {{/reflecti?}}[re-frame "1.0.0"]
-                 [com.7theta/via "4.2.0"]
+                 [re-frame "1.1.2"]
+                 [com.7theta/via "6.2.2"]{{#auth?}}
+                 [com.7theta/via-auth "0.2.0"]{{/auth?}}{{#routing?}}
+                 [metosin/reitit-frontend "0.5.10"]{{/routing?}}
 
                  [integrant "0.8.0"]]
   :profiles {:dev {:source-paths ["dev"]
                    :dependencies [[binaryage/devtools "1.0.2"]
-                                  [thheller/shadow-cljs "2.10.21"]
-                                  [integrant/repl "0.3.1"]{{#trace?}}
+                                  [thheller/shadow-cljs "2.11.12"]
+                                  [integrant/repl "0.3.2"]{{#trace?}}
                                   [day8.re-frame/re-frame-10x "0.7.0"]{{/trace?}}]}
              :uberjar {:source-paths ["prod"]
                        :resource-paths ["resources/public/js/compiled"]

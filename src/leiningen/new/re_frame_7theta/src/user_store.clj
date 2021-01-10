@@ -1,5 +1,5 @@
 (ns {{ns-name}}.user-store
-    (:require [via.authenticator :as auth]
+    (:require [via-auth.id-password :as auth]
               [integrant.core :as ig]))
 
 ;; Dummy user-store that will authenticate if the id and password are

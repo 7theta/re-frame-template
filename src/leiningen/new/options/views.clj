@@ -13,4 +13,7 @@
 
 (defn files
   [data options]
-  [["src/{{sanitized}}/views.cljs" (helpers/render "src/views.cljs" data)]])
+  (concat
+   [["src/{{sanitized}}/views.cljs" (helpers/render "src/views.cljs" data)]]
+   (when (options :routing)
+     [["src/{{sanitized}}/modules.cljs" (helpers/render "src/modules.cljs" data)]])))

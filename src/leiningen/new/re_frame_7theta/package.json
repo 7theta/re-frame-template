@@ -1,20 +1,25 @@
 {
     "scripts": {
-        "copy-less": "$(npm bin)/copyfiles -u 1 \"node_modules/antd/**/*.less\" resources/public/less",
-        "build-release": "rm -rf  target resources/public/js/compiled .shadow-cljs && shadow-cljs release prod && lein uberjar"
+        "build-dev": "npm run build-tailwind-dev {{#fontawesome?}}&& npm run build-fontawesome-dev{{/fontawesome?}} && npm run build-css-min",
+        "build-tailwind-dev": "npx tailwindcss-cli@latest build resources/css/tailwind.css -o resources/public/css/tailwind.css",{{#fontawesome?}}
+        "build-fontawesome-dev": "cp resources/public/vendor/fontawesome/css/all.css resources/public/css/fontawesome.css",{{/fontawesome?}}
+        "build-release": "rm -rf target resources/public/js/compiled .shadow-cljs && shadow-cljs release prod && npm run build-tailwind-release {{#fontawesome?}}&& npm run build-fontawesome-release{{/fontawesome?}} && npm run build-css-min && lein uberjar",
+        "build-tailwind-release": "NODE_ENV=production npx tailwindcss-cli@latest build resources/css/tailwind.css -o resources/public/css/tailwind.css",{{#fontawesome?}}
+        "build-fontawesome-release": "npx purgecss --css resources/public/css/fontawesome.css --content \"resources/public/**/*.js\" --output resources/public/css/fontawesome.css",{{/fontawesome?}}
+        "build-css-min": "npx clean-css-cli -o resources/public/css/tailwind.min.css resources/public/css/tailwind.css {{#fontawesome?}}&& npx clean-css-cli -o resources/public/css/fontawesome.min.css resources/public/css/fontawesome.css{{/fontawesome?}}"
     },
     "dependencies": {
-        {{#reflecti?}}"antd": "^3.22.0",
-        "d3": "4.12.0",
-        "draft-js": "^0.10.5",{{/reflecti?}}
-        "create-react-class": "^15.6.3",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6"
+        "@tailwindcss/forms": "^0.2.1",
+        "tailwindcss": "^2.0.2",
+        "create-react-class": "15.7.0",
+        "date-fns": "2.16.1",
+        "date-fns-tz": "1.0.12",
+        "react": "16.14.0",
+        "react-dom": "16.14.0"
     },
     "devDependencies": {
-        {{#trace?}}"react-flip-move": "^3.0.3",
-        "react-highlight.js": "^1.0.7",{{/trace?}}
-        "copyfiles": "^2.1.1",
-        "shadow-cljs": "^2.10.21"
+        {{#trace?}}"react-flip-move": "3.0.4",
+        "react-highlight.js": "1.0.7",{{/trace?}}
+        "shadow-cljs": "2.11.12"
     }
 }
